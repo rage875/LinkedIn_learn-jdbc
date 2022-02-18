@@ -19,19 +19,10 @@ public class JDBCExecutor {
             // Create DAO for the Customer
             CustomerDao customerDao =  new CustomerDao(connection);
 
-            // Create Customer info
-            Customer customer = new Customer();
-            customer.setFirstName("First name dummy");
-            customer.setLastName("Last name dummy");
-            customer.setEmail("email@dummy.com");
-            customer.setPhone("(111) 111-6543");
-            customer.setAddress("Address dummy");
-            customer.setCity("City dummy");
-            customer.setState("State dummy");
-            customer.setZipcode("11111");
+            // Read Customer
+            Customer customer = customerDao.findById(1000);
+            System.out.println(customer.getFirstName() + " " + customer.getLastName());
 
-            // Call insert to database
-            customerDao.create(customer);
         } catch(SQLException e) {
             e.printStackTrace();
         }
