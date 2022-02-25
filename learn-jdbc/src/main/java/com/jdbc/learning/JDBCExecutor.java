@@ -22,8 +22,12 @@ public class JDBCExecutor {
             // Create DAO for the Customer
             CustomerDao customerDAO = new CustomerDao(connection);
 
-            // Read the Sorted Customers by Last name
-            customerDAO.findAllSorted(20).forEach(System.out::println);
+            // Get paged
+            System.out.println("Paged");
+            for(int i=1;i<3;i++){
+                System.out.println("Page number: " + i);
+                customerDAO.findAllPaged(10, i).forEach(System.out::println);
+            }
 
         } catch(SQLException e) {
             e.printStackTrace();
