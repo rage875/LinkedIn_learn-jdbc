@@ -7,6 +7,7 @@ import com.jdbc.learning.model.Order;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 public class JDBCExecutor {
 
@@ -22,8 +23,8 @@ public class JDBCExecutor {
             OrderDAO orderDAO =  new OrderDAO(connection);
 
             // Read an Order
-            Order order = orderDAO.findById(1000);
-            System.out.println(order);
+            List<Order> orders = orderDAO.getOrdersForCustomer(789);
+            orders.forEach(System.out::println);
 
         } catch(SQLException e) {
             e.printStackTrace();
