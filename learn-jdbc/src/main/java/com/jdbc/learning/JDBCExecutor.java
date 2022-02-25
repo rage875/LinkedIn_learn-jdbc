@@ -19,15 +19,30 @@ public class JDBCExecutor {
             // Create DAO for the Customer
             CustomerDao customerDao =  new CustomerDao(connection);
 
-            // Read Customer
-            Customer customer = customerDao.findById(100);
-            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " +
-                customer.getEmail());
-            // Update Customer
-            customer.setEmail("gwashington@wh.gov");
-            customer = customerDao.update(customer);
-            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " +
-                customer.getEmail());
+            // Create a new Customer
+            Customer customer = new Customer();
+            customer.setFirstName("John");
+            customer.setLastName("Adams");
+            customer.setEmail("jadams.wh.gov");
+            customer.setAddress("1234 Main St");
+            customer.setCity("Arlington");
+            customer.setState("VA");
+            customer.setPhone("(555) 555-9845");
+            customer.setZipcode("01234");
+
+            Customer dbCustomer = customerDao.create(customer);
+            System.out.println(dbCustomer);
+
+            // Read the created Customer
+            dbCustomer = customerDao.findById(dbCustomer.getId());
+
+            // Update the created Customer
+            dbCustomer.setEmail("john.adams@wh.gov");
+            dbCustomer = customerDao.update(dbCustomer);
+            System.out.println(dbCustomer);
+
+            // Delete the created Customer
+            customerDao.delete(dbCustomer.getId());
 
         } catch(SQLException e) {
             e.printStackTrace();
