@@ -20,8 +20,14 @@ public class JDBCExecutor {
             CustomerDao customerDao =  new CustomerDao(connection);
 
             // Read Customer
-            Customer customer = customerDao.findById(1000);
-            System.out.println(customer.getFirstName() + " " + customer.getLastName());
+            Customer customer = customerDao.findById(100);
+            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " +
+                customer.getEmail());
+            // Update Customer
+            customer.setEmail("gwashington@wh.gov");
+            customer = customerDao.update(customer);
+            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " +
+                customer.getEmail());
 
         } catch(SQLException e) {
             e.printStackTrace();
