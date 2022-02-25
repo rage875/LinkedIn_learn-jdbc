@@ -1,7 +1,9 @@
 package com.jdbc.learning;
 
 import com.jdbc.learning.dao.CustomerDao;
+import com.jdbc.learning.dao.OrderDAO;
 import com.jdbc.learning.model.Customer;
+import com.jdbc.learning.model.Order;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,33 +18,12 @@ public class JDBCExecutor {
             // Connection to database connection manager
             Connection connection = dcm.getConnection();
 
-            // Create DAO for the Customer
-            CustomerDao customerDao =  new CustomerDao(connection);
+            // Create DAO for the Order
+            OrderDAO orderDAO =  new OrderDAO(connection);
 
-            // Create a new Customer
-            Customer customer = new Customer();
-            customer.setFirstName("John");
-            customer.setLastName("Adams");
-            customer.setEmail("jadams.wh.gov");
-            customer.setAddress("1234 Main St");
-            customer.setCity("Arlington");
-            customer.setState("VA");
-            customer.setPhone("(555) 555-9845");
-            customer.setZipcode("01234");
-
-            Customer dbCustomer = customerDao.create(customer);
-            System.out.println(dbCustomer);
-
-            // Read the created Customer
-            dbCustomer = customerDao.findById(dbCustomer.getId());
-
-            // Update the created Customer
-            dbCustomer.setEmail("john.adams@wh.gov");
-            dbCustomer = customerDao.update(dbCustomer);
-            System.out.println(dbCustomer);
-
-            // Delete the created Customer
-            customerDao.delete(dbCustomer.getId());
+            // Read an Order
+            Order order = orderDAO.findById(1000);
+            System.out.println(order);
 
         } catch(SQLException e) {
             e.printStackTrace();
