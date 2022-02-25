@@ -19,12 +19,11 @@ public class JDBCExecutor {
             // Connection to database connection manager
             Connection connection = dcm.getConnection();
 
-            // Create DAO for the Order
-            OrderDAO orderDAO =  new OrderDAO(connection);
+            // Create DAO for the Customer
+            CustomerDao customerDAO = new CustomerDao(connection);
 
-            // Read an Order
-            List<Order> orders = orderDAO.getOrdersForCustomer(789);
-            orders.forEach(System.out::println);
+            // Read the Sorted Customers by Last name
+            customerDAO.findAllSorted(20).forEach(System.out::println);
 
         } catch(SQLException e) {
             e.printStackTrace();
